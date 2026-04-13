@@ -712,17 +712,17 @@ function applyBg(cfg) {
   const bgEl = document.getElementById('bg');
   let afterCss = '';
   if (cfg.id === 'custom' && cfg.url) {
-    bgEl.style.background = '#0d0d1f';
     bgEl.style.backgroundImage = `url(${JSON.stringify(cfg.url)})`;
     bgEl.style.backgroundSize = 'cover';
     bgEl.style.backgroundPosition = 'center';
+    bgEl.style.backgroundColor = '#0d0d1f';
     afterCss = '#bg::after{background:rgba(0,0,0,.52)}';
   } else {
     const preset = BG_PRESETS.find(p => p.id === cfg.id) || BG_PRESETS[0];
-    bgEl.style.backgroundImage = '';
+    bgEl.style.backgroundImage = preset.gradient;
     bgEl.style.backgroundSize = '';
     bgEl.style.backgroundPosition = '';
-    bgEl.style.background = preset.gradient;
+    bgEl.style.backgroundColor = '';
     afterCss = `#bg::after{background:${preset.overlay}}`;
   }
   let styleTag = document.getElementById('_bg_after');
