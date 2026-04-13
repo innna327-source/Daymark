@@ -69,7 +69,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'PingFang SC','M
 
 /* ── SHARED ── */
 .fullmod{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;background:transparent}
-.mod-hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;background:rgba(0,0,0,.45);backdrop-filter:blur(20px)}
+.mod-hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.13);flex-shrink:0;background:rgba(255,255,255,.1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
 .mod-hd h2{font-size:17px;font-weight:600}
 .close-btn{background:transparent;border:none;color:var(--txt);font-size:22px;cursor:pointer;line-height:1}
 .hidden{display:none!important}
@@ -107,7 +107,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'PingFang SC','M
 .dkm-glass{background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:20px;margin-bottom:16px}
 .dkm-ring-warm{stroke:rgba(255,255,255,.75)}
 .dkm-circ-prog{transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1s ease}
-.dkm-fix{position:fixed;bottom:0;left:0;right:0;padding:16px;backdrop-filter:blur(20px);background:rgba(0,0,0,.45);border-top:1px solid rgba(255,255,255,.08);z-index:160}
+.dkm-fix{position:fixed;bottom:0;left:0;right:0;padding:16px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);background:rgba(255,255,255,.1);border-top:1px solid rgba(255,255,255,.13);z-index:160}
 .dkm-btn-warm{background:rgba(255,255,255,.16);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);box-shadow:0 4px 14px rgba(255,255,255,.06)}
 .dkm-btn-base{width:100%;padding:16px;border:none;border-radius:18px;color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:transform .12s;-webkit-tap-highlight-color:transparent}
 .dkm-btn-base:active{transform:scale(.97)}
@@ -116,8 +116,9 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'PingFang SC','M
 
 /* ── Increment input ── */
 .dkm-inc-row{display:flex;gap:10px;align-items:center;margin-bottom:12px}
-.dkm-inc-input{flex:1;padding:12px 10px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);font-size:24px;font-weight:700;color:#fff;outline:none;font-family:inherit;text-align:center;transition:border-color .2s;-webkit-appearance:none;-moz-appearance:textfield}
+.dkm-inc-input{flex:1;min-width:0;padding:12px 10px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);font-size:24px;font-weight:700;color:#fff;outline:none;font-family:inherit;text-align:center;transition:border-color .2s;-webkit-appearance:none;-moz-appearance:textfield}
 .dkm-inc-input::-webkit-outer-spin-button,.dkm-inc-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.dkm-inc-input::placeholder{font-size:13px;font-weight:400;color:rgba(255,255,255,.35)}
 .dkm-inc-input:focus{border-color:rgba(255,255,255,.4)}
 .dkm-inc-unit-lbl{font-size:15px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap;min-width:36px;text-align:left}
 
@@ -180,7 +181,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,'PingFang SC','M
   <div class="dkm-scroll" id="dkm-scroll"></div>
   <div class="dkm-fix" id="dkm-fix">
     <div class="dkm-inc-row">
-      <input type="number" class="dkm-inc-input" id="dkm-inc-val" placeholder="1" min="0.01" step="0.1" value="1" inputmode="decimal">
+      <input type="number" class="dkm-inc-input" id="dkm-inc-val" placeholder="如 0.5 / 2" min="0.01" step="0.1" inputmode="decimal">
       <span class="dkm-inc-unit-lbl" id="dkm-inc-unit">次</span>
     </div>
     <button class="dkm-btn-base dkm-btn-warm" id="dkm-submit-btn" onclick="submitDakaCheckin()">完成打卡 ✓</button>
@@ -425,7 +426,8 @@ function openDakaMod(taskId) {
   const unit = task.unit || '次';
   document.getElementById('dkm-title').textContent = task.name;
   document.getElementById('dkm-inc-unit').textContent = unit;
-  document.getElementById('dkm-inc-val').value = '1';
+  document.getElementById('dkm-inc-val').value = '';
+  document.getElementById('dkm-inc-val').placeholder = `如 0.5${unit} / 2${unit}`;
   const btn = document.getElementById('dkm-submit-btn');
   btn.className = 'dkm-btn-base dkm-btn-warm';
   btn.textContent = '完成打卡 ✓';
